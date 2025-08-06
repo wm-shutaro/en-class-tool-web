@@ -1,0 +1,17 @@
+{
+  "name": "Web",
+  "build": {
+    "dockerfile": "../Dockerfile"
+  },
+  "forwardPorts": [5173],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "dsznajder.es7-react-js-snippets",
+        "bradlc.vscode-tailwindcss"
+      ]
+    }
+  }
+}

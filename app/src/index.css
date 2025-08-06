@@ -1,0 +1,83 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-text: var(--color-neutral-950);
+  --color-text-dark: var(--color-neutral-50);
+  --color-bg: var(--color-white);
+  --color-bg-dark: var(--color-neutral-800);
+  --color-border: var(--color-gray-900);
+  --color-border-dark: var(--color-gray-100);
+  --color-link: var(--color-indigo-400);
+  --color-link-hover: var(--color-indigo-500);
+  --color-disabled: var(--color-gray-400);
+  --color-primary: var(--color-orange-500);
+  --color-primary-light: var(--color-orange-300);
+  --color-primary-dark: var(--color-orange-700);
+  --color-danger: var(--color-red-600);
+  --color-danger-light: var(--color-red-400);
+  --color-danger-dark: var(--color-red-800);
+}
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: var(--color-link);
+  text-decoration: inherit;
+}
+a:hover {
+  color: var(--color-link-hover);
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  align-items: center;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  justify-content: center;
+  outline: none;
+  transition: border-color 0.25s;
+}
+
+input {
+  border-radius: 0.5rem;
+  border: 2px solid var(--color-border);
+  outline: none;
+  padding: 0.25rem 0.5rem;
+}
+input:focus,
+input:focus-visible {
+  border: 2px solid var(--color-primary);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color: var(--color-text-dark);
+    background-color: var(--color-bg-dark);
+  }
+
+  input {
+    border-color: var(--color-border-dark);
+  }
+}
