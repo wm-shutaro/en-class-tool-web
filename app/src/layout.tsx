@@ -12,7 +12,7 @@ const Layout: React.FC = () => {
           <Link to="/" className="!text-text-dark text-2xl">
             English Class Tool
           </Link>
-          <div className="hidden grow gap-6 text-xl md:flex">
+          <div className="text-md hidden grow gap-6 md:flex">
             <WheelOfNamesLink className="!text-text-dark fill-text-dark" />
             <GroupingLink className="!text-text-dark fill-text-dark" />
             <PickingLink className="!text-text-dark fill-text-dark" />
@@ -31,16 +31,32 @@ const Layout: React.FC = () => {
             </MenuButton>
             <MenuItems
               anchor={{ to: 'left start', offset: '4px' }}
-              className="bg-bg dark:bg-bg-dark text- z-11 rounded border"
+              transition
+              className="bg-bg dark:bg-bg-dark z-11 rounded border focus-visible:outline-none"
             >
               <MenuItem>
-                <WheelOfNamesLink className="hover:bg-bg/20 !text-text dark:!text-text-dark dark:fill-text-dark px-1.5 py-2" />
+                {({ close }) => (
+                  <WheelOfNamesLink
+                    onClick={close}
+                    className="hover:bg-bg/20 !text-text dark:!text-text-dark dark:fill-text-dark px-1.5 py-2"
+                  />
+                )}
               </MenuItem>
               <MenuItem>
-                <GroupingLink className="hover:bg-bg/20 !text-text dark:!text-text-dark dark:fill-text-dark px-1.5 py-2" />
+                {({ close }) => (
+                  <GroupingLink
+                    onClick={close}
+                    className="hover:bg-bg/20 !text-text dark:!text-text-dark dark:fill-text-dark px-1.5 py-2"
+                  />
+                )}
               </MenuItem>
               <MenuItem>
-                <PickingLink className="hover:bg-bg/20 !text-text dark:!text-text-dark dark:fill-text-dark px-1.5 py-2" />
+                {({ close }) => (
+                  <PickingLink
+                    onClick={close}
+                    className="hover:bg-bg/20 !text-text dark:!text-text-dark dark:fill-text-dark px-1.5 py-2"
+                  />
+                )}
               </MenuItem>
             </MenuItems>
           </Menu>

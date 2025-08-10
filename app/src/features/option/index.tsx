@@ -35,8 +35,8 @@ const HomePage: React.FC = () => {
 
   return (
     <>
-      <div className="flex h-full">
-        <div className="grow">
+      <div className="flex h-full flex-wrap justify-center md:flex-nowrap">
+        <div className="grow basis-full sm:basis-auto">
           <Outlet />
         </div>
         <div className="flex flex-col gap-y-2 py-2">

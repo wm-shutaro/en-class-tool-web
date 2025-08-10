@@ -1,11 +1,16 @@
 import clsx from 'clsx';
 import { Link } from 'react-router';
 
-const GroupingLink: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
+const GroupingLink: React.FC<React.HTMLAttributes<HTMLAnchorElement>> = ({
+  onClick,
   className,
 }) => {
   return (
-    <Link to="/grouping" className={clsx(className, 'flex items-center gap-1')}>
+    <Link
+      to="/grouping"
+      onClick={onClick}
+      className={clsx(className, 'flex items-center gap-1')}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         height="24px"

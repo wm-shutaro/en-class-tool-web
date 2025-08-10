@@ -1,12 +1,14 @@
 import clsx from 'clsx';
 import { Link } from 'react-router';
 
-const WheelOfNamesLink: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
+const WheelOfNamesLink: React.FC<React.HTMLAttributes<HTMLAnchorElement>> = ({
+  onClick,
   className,
 }) => {
   return (
     <Link
       to="/wheel-of-names"
+      onClick={onClick}
       className={clsx(className, 'flex items-center gap-1')}
     >
       <svg

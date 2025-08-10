@@ -4,6 +4,11 @@ import { useOptionsContext } from 'src/providers/Options';
 
 const COLORS = ['#ec003f', '#efb100', '#00c951', '#2b7fff'];
 
+const MIN_SIZE = 360;
+// tailwind
+const MIN_WIDTH = 'min-w-[360px]';
+const MIN_HEIGHT = 'min-h-[360px]';
+
 const WheelOfNames: React.FC = () => {
   const { availables } = useOptionsContext();
   const sections = availables;
@@ -14,6 +19,33 @@ const WheelOfNames: React.FC = () => {
   const [angle, setAngle] = useState(0);
   const [spinning, setSpinning] = useState(false);
   const [colors, setColors] = useState<string[]>([]);
+
+  const resize = useCallback(() => {
+    let size;
+    if (mainRef.current) {
+      const mainSize = Math.min(
+        mainRef.current.clientHeight,
+        mainRef.current.clientWidth,
+      );
+      size = mainSize > MIN_SIZE ? mainSize : MIN_SIZE;
+    } else {
+      if (currentSize === 0) return;
+      size = currentSize;
+    }
+    setCurrentSize(size);
+  }, [currentSize]);
+
+  useEffect(() => {
+    resize();
+  }, [resize]);
+
+  useEffect(() => {
+    window.addEventListener('resize', resize);
+
+    return () => {
+      window.removeEventListener('resize', resize);
+    };
+  }, [resize]);
 
   const calcColorOrder = useCallback((): string[] => {
     const result = [];
@@ -77,18 +109,13 @@ const WheelOfNames: React.FC = () => {
   // 円を描画
   const drawWheel = useCallback(
     (canvasContext: CanvasRenderingContext2D, rotation: number) => {
-      // サイズ変更
-      if (!mainRef.current && currentSize === 0) return;
-      const size = mainRef.current
-        ? Math.floor(mainRef.current?.clientHeight / 100) * 100
-        : currentSize;
-      setCurrentSize(size);
+      if (currentSize === 0) return;
 
-      const radius = (size - pointerMargin * 2) / 2;
-      const centerX = radius + pointerMargin;
+      const radius = (currentSize - pointerMargin * 2) / 2;
+      const centerX = currentSize / 2;
       const centerY = radius + pointerMargin;
 
-      canvasContext.clearRect(0, 0, size, size);
+      canvasContext.clearRect(0, 0, currentSize, currentSize);
 
       let sectionColors = colors;
       if (colors.length !== sections.length) {
@@ -123,7 +150,7 @@ const WheelOfNames: React.FC = () => {
         while (fontSize > 1) {
           canvasContext.font = `bold ${fontSize}px san-serif`;
           const textWidth = canvasContext.measureText(text).width;
-          if (textWidth <= (size / 2) * 0.7) break;
+          if (textWidth <= (currentSize / 2) * 0.65) break;
           fontSize--;
         }
         canvasContext.textAlign = 'end';
@@ -146,7 +173,7 @@ const WheelOfNames: React.FC = () => {
       canvasContext.shadowOffsetX = 0;
       canvasContext.shadowOffsetY = 4;
       canvasContext.beginPath();
-      canvasContext.arc(centerX, centerY, 24, 0, 2 * Math.PI);
+      canvasContext.arc(centerX, centerY, radius * 0.1, 0, 2 * Math.PI);
       canvasContext.fillStyle = 'white';
       canvasContext.fill();
       canvasContext.restore();
@@ -226,13 +253,16 @@ const WheelOfNames: React.FC = () => {
 
   return (
     <>
-      <div ref={mainRef} className="flex h-full w-full justify-center">
+      <div
+        ref={mainRef}
+        className={`relative flex h-full w-full justify-center ${MIN_WIDTH} ${MIN_HEIGHT}`}
+      >
         <canvas
           ref={canvasRef}
           width={currentSize}
           height={currentSize}
           onClick={spin}
-          className="rounded-[50%] hover:cursor-pointer"
+          className="absolute rounded-[50%] hover:cursor-pointer"
         />
       </div>
       <Dialog
@@ -241,14 +271,16 @@ const WheelOfNames: React.FC = () => {
         className="relative z-50 transition-all"
       >
         <div className="fixed inset-0 flex items-center justify-center bg-black/30">
-          <DialogPanel className="bg-bg dark:bg-bg-dark min-w-2xl rounded-2xl text-4xl shadow-xl">
-            <DialogTitle className="bg-primary text-text-dark rounded-t-2xl p-6">
+          <DialogPanel className="bg-bg dark:bg-bg-dark w-[80%] rounded-2xl text-xl shadow-xl md:text-4xl">
+            <DialogTitle className="bg-primary text-text-dark rounded-t-2xl p-3 md:p-6">
               The one that was chosen is
             </DialogTitle>
-            <p className="flex justify-center py-6 text-8xl">{result}</p>
-            <div className="flex justify-end p-4">
+            <p className="flex justify-center py-3 text-4xl md:py-6 md:text-8xl">
+              {result}
+            </p>
+            <div className="flex justify-end p-2 md:p-4">
               <button
-                className="bg-primary text-text-dark p-4"
+                className="bg-primary text-text-dark p-2 md:p-4"
                 onClick={() => setResult('')}
               >
                 Close

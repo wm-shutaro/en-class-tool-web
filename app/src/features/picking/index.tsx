@@ -26,19 +26,21 @@ const Picking: React.FC = () => {
 
   return (
     <div className="flex h-full flex-col">
-      <div className="flex items-center gap-2">
-        <div>Input the number of people: </div>
-        <Input
-          type="number"
-          onKeyDown={onEnterKeyDown}
-          onChange={onChangeInput}
-        />
-        <Button
-          onClick={pickPeople}
-          className="bg-primary hover:border-primary-light text-text-dark border border-transparent px-4 py-2"
-        >
-          Pick
-        </Button>
+      <div className="flex flex-wrap items-center gap-2">
+        <div className="text-nowrap">Input the number of people: </div>
+        <div className="flex gap-2">
+          <Input
+            type="number"
+            onKeyDown={onEnterKeyDown}
+            onChange={onChangeInput}
+          />
+          <Button
+            onClick={pickPeople}
+            className="bg-primary hover:border-primary-light text-text-dark border border-transparent px-4 py-2"
+          >
+            Pick
+          </Button>
+        </div>
       </div>
       <div className="flex flex-wrap gap-4 overflow-auto p-5">
         {picked.map((option, index) => (

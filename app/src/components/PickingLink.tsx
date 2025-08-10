@@ -1,11 +1,16 @@
 import clsx from 'clsx';
 import { Link } from 'react-router';
 
-const PickingLink: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
+const PickingLink: React.FC<React.HTMLAttributes<HTMLAnchorElement>> = ({
+  onClick,
   className,
 }) => {
   return (
-    <Link to="picking" className={clsx(className, 'flex items-center gap-1')}>
+    <Link
+      to="picking"
+      onClick={onClick}
+      className={clsx(className, 'flex items-center gap-1')}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         height="24px"

@@ -75,19 +75,21 @@ const Grouping: React.FC = () => {
 
   return (
     <div className="flex h-full flex-col">
-      <div className="flex items-center gap-2">
-        <div>Input the number of group: </div>
-        <Input
-          type="number"
-          onKeyDown={onEnterKeyDown}
-          onChange={onChangeInput}
-        />
-        <Button
-          onClick={createGroup}
-          className="bg-primary hover:border-primary-light text-text-dark border border-transparent p-2"
-        >
-          Create
-        </Button>
+      <div className="flex flex-wrap items-center gap-2">
+        <div className="text-nowrap">Input the number of group: </div>
+        <div className="flex gap-2">
+          <Input
+            type="number"
+            onKeyDown={onEnterKeyDown}
+            onChange={onChangeInput}
+          />
+          <Button
+            onClick={createGroup}
+            className="bg-primary hover:border-primary-light text-text-dark border border-transparent p-2"
+          >
+            Create
+          </Button>
+        </div>
         <div>{makeCountPerGroupText()}</div>
       </div>
       <div className="flex flex-wrap gap-4 overflow-auto p-5">
