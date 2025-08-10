@@ -146,7 +146,8 @@ const WheelOfNames: React.FC = () => {
         canvasContext.rotate(textAngle);
         canvasContext.fillStyle = 'black';
 
-        let fontSize = 42;
+        // フォントサイズ調整
+        let fontSize = 64;
         while (fontSize > 1) {
           canvasContext.font = `bold ${fontSize}px san-serif`;
           const textWidth = canvasContext.measureText(text).width;
