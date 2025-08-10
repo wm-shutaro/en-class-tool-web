@@ -147,11 +147,11 @@ const WheelOfNames: React.FC = () => {
         canvasContext.fillStyle = 'black';
 
         // フォントサイズ調整
-        let fontSize = 64;
+        let fontSize = 56;
         while (fontSize > 1) {
           canvasContext.font = `bold ${fontSize}px san-serif`;
           const textWidth = canvasContext.measureText(text).width;
-          if (textWidth <= (currentSize / 2) * 0.65) break;
+          if (textWidth <= (currentSize / 2) * 0.6) break;
           fontSize--;
         }
         canvasContext.textAlign = 'end';
